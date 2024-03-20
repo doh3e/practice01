@@ -32,7 +32,6 @@ public class HomeController {
 		String name = request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
 		
-		Service service;
 		Service ss = sqlsession.getMapper(Service.class);
 		ss.infosave(name,age);
 		
