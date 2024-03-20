@@ -1,16 +1,18 @@
 package com.ezen.practice01;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-
+	
 	@Autowired
 	SqlSession sqlsession;
 	
@@ -26,7 +28,13 @@ public class HomeController {
 		return "main";
 	}
 	
-	@RequestMapping(value="/savein", method = RequestMethod.POST)
+	@RequestMapping(value = "/input")
+	public String input() {
+		
+		return "input";
+	}
+	
+	@RequestMapping(value="/inputsave", method = RequestMethod.POST)
 	public String save (HttpServletRequest request) {
 		
 		String name = request.getParameter("name");
@@ -38,5 +46,16 @@ public class HomeController {
 		return "redirect:main";
 	}
 
-	
+
+	@RequestMapping(value = "/output")
+	public String outputa(Model mo) {
+		
+		Service ss = sqlsession.getMapper(Service.class);
+		ArrayList<InfoDTO>list=ss.output();
+		
+		mo.addAttribute("list", list);
+		
+		return "output";
+	}
+
 }
