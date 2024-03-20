@@ -3,4 +3,10 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.ezen.practice01.Service">
+
+<select id="output" resultType="com.ezen.practice01.InfoDTO">
+	select * from info0320
+</select>
+
+
 </mapper>
