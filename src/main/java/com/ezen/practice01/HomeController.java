@@ -1,15 +1,20 @@
 package com.ezen.practice01;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	SqlSession sqlSession;
 
 	@Autowired
 	SqlSession sqlsession;
@@ -39,5 +44,16 @@ public class HomeController {
 		return "redirect:main";
 	}
 
-	
+
+	@RequestMapping(value = "/output")
+	public String outputa(Model mo) {
+		
+		Service serv=sqlSession.getMapper(Service.class);
+		ArrayList<InfoDTO>list=serv.output();
+		
+		mo.addAttribute("list", list);
+		
+		return "output";
+	}
+
 }
