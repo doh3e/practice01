@@ -7,6 +7,8 @@
 <select id="output" resultType="com.ezen.practice01.InfoDTO">
 	select * from info0320
 </select>
-
+<insert id="infosave">
+	insert into info0320 values(#{param1},#{param2})
+</insert>
 
 </mapper>
